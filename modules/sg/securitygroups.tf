@@ -91,20 +91,19 @@ resource "aws_security_group" "albsg" {
 }
 
 
-output "BASTION_SG_ID" {
+output "bastion_sg" {
      value = aws_security_group.bastionsg.id
 }
 
-output "WEB_SG_ID" {
+output "web_sg" {
      value = aws_security_group.websg.id
 }
 
-
-output "DB_SG_ID" {
+output "db_sg" {
      value = aws_security_group.dbsg.id
 }
 
-output "ALB_SG_ID" {
+output "alb_sg" {
      value = aws_security_group.albsg.id
 }
 

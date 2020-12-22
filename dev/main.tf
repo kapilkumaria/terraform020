@@ -26,7 +26,7 @@ module "vpc" {
    pri-subnet_1b_cidr = "192.168.0.48/28"
 }
 
-module "my_sg" {
+module "sg" {
    source = "../modules/sg"
    terravpcid = module.vpc.vpc_id
 }
@@ -61,3 +61,50 @@ module "my_sg" {
 #       Name = "kapil_instance"
 #    }
 # }
+
+output "VPC_ID" {
+   value = module.vpc.vpc_id
+}
+
+output "SUBNET_PUBLIC_1a" {
+   value = module.vpc.public-1a
+}
+
+output "SUBNET_PUBLIC_1b" {
+   value = module.vpc.public-1b
+}
+
+output "SUBNET_PRIVATE_1a" {
+   value = module.vpc.private-1a
+}
+
+output "SUBNET_PRIVATE_1b" {
+   value = module.vpc.private-1b
+}
+
+output "BASTION_SG_ID" {
+     value = module.sg.bastion_sg
+}
+
+output "WEB_SG_ID" {
+     value = module.sg.web_sg
+}
+
+output "DB_SG_ID" {
+     value = module.sg.db_sg
+}
+
+output "alb_sg" {
+     value = module.sg.alb_sg
+}
+
+
+
+
+
+
+
+
+
+
+
