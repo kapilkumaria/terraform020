@@ -28,6 +28,7 @@ module "vpc" {
 
 module "my_sg" {
    source = "../modules/sg"
+   terravpcid = module.vpc.vpc_id
 }
 
 # module "my_ec2" {
@@ -51,12 +52,12 @@ module "my_sg" {
 #    instanceattachment2_id = module.my_ec2.web1binstance
 # }
 
-resource "aws_instance" "myinstance" {
-   ami = "ami-02e44367276fe7adc"
-   instance_type = "t2.micro"
-   subnet_id = module.vpc.public-1a
-
-   tags = {
-      Name = "kapil_instance"
-   }
-}
+# resource "aws_instance" "myinstance" {
+#    ami = "ami-02e44367276fe7adc"
+#    instance_type = "t2.micro"
+#    subnet_id = module.vpc.public-1a
+   
+#    tags = {
+#       Name = "kapil_instance"
+#    }
+# }

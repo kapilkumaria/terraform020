@@ -1,73 +1,9 @@
-#provider "aws" {
-#    region = "ca-central-1"
-#}
-
-
-module "vpc" {
-   source = "../vpc"
-}
-
-
-# variable "bastioningressrules" {
-#     type = list(number)
-#     default = [22]
-# }
-
-
-# variable "bastionegressrules" {
-#     type = list(number)
-#     default = [22]
-# }
-
-#variable "webingressrules" {
-#    type = tuple ([string, number])
-#    default = ["aws_security_group.bastionsg.id", 80]
-#}
-
-#variable "webegressrules" {
-#    type = tuple ([string, number])
-#    default = ["aws_security_group.bastionsg.id", 80]
-#}
-
-
-# resource "aws_security_group" "bastionsg" {
-#     name = "bastionsg"
-#     description = "Security group for bastion server"
-#     vpc_id = module.vpc.VPC_ID
-
-#     dynamic "ingress" {
-#       iterator = port
-#       for_each = var.bastioningressrules
-#       content {
-#        from_port = port.value
-#        to_port = port.value
-#        protocol = "TCP"
-#        cidr_blocks = ["66.222.146.176/32"]
-#       }
-#     }
-#       dynamic "egress" {
-#       iterator = port
-#       for_each = var.bastionegressrules
-#       content {
-#        to_port = port.value
-#        from_port = port.value
-#        protocol = "TCP"
-#        cidr_blocks = ["66.222.146.176/32"]
-#       }
-#     }
-
-#   tags = {
-#     Name = "kapil_bastion_sg"
-#   }
-
-# }      
-
 
 resource "aws_security_group" "bastionsg" {
     name = "bastionsg"
     description = "security group for bastion server"
-    vpc_id = module.vpc.vpc_id
-
+    vpc_id = var.terravpcid
+    
     ingress {
       description = "Allow SSH connection from my computer only"
       from_port = 22
@@ -82,12 +18,10 @@ resource "aws_security_group" "bastionsg" {
 }
 
 
-
-
 resource "aws_security_group" "websg" {
     name = "websg"
     description = "security group for web servers"
-    vpc_id = module.vpc.vpc_id
+    vpc_id = var.terravpcid
 
     ingress {
       description = "Allow SSH connection from bastion server only"
@@ -114,7 +48,7 @@ resource "aws_security_group" "websg" {
 resource "aws_security_group" "dbsg" {
     name = "dbsg"
     description = "security group for database servers"
-    vpc_id = module.vpc.vpc_id
+    vpc_id = var.terravpcid
 
     ingress {
       description = "Allow SSH connection from bastion server only"
@@ -141,7 +75,7 @@ resource "aws_security_group" "dbsg" {
 resource "aws_security_group" "albsg" {
     name = "albsg"
     description = "security group for application load balancer"
-    vpc_id = module.vpc.vpc_id
+    vpc_id = var.terravpcid
 
     ingress {
       description = "Allow HTTP traffic from internet"
@@ -155,10 +89,6 @@ resource "aws_security_group" "albsg" {
       Name = "kapil_albsg"
     }
 }
-
-
-
-
 
 
 output "BASTION_SG_ID" {

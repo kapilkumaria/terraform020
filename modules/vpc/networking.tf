@@ -29,12 +29,6 @@ resource "aws_route_table" "publicrt" {
 }
 
 
-
-
-
-
-
-
 resource "aws_subnet" "public1a" {
    vpc_id = var.vpc_id
    availability_zone = var.az_pub_1a
