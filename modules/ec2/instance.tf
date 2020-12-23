@@ -28,7 +28,7 @@ resource "aws_instance" "web1a" {
     instance_type = var.instance_type
     subnet_id = var.public-1a
     vpc_security_group_ids = [var.sgforweb]
-    user_data = file("webserver-script.sh")
+    user_data = file("webserver-script-logfiles.sh")
     key_name = "kapilKP"
 
     tags = {
@@ -43,7 +43,7 @@ resource "aws_instance" "web1b" {
     instance_type = var.instance_type
     subnet_id = var.public-1b
     vpc_security_group_ids = [var.sgforweb]
-    user_data = file("webserver-script.sh")
+    user_data = file("webserver-script-images.sh")
     key_name = "kapilKP"
 
     tags = {
