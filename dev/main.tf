@@ -40,10 +40,14 @@ module "ec2" {
    #ec2_count = 1
    ami_id = "ami-02e44367276fe7adc"
    instance_type = "t2.micro"
+   #vpc_id = module.vpc.vpc_id
    public-1a = module.vpc.public-1a
    public-1b = module.vpc.public-1b
    private-1a = module.vpc.private-1a
    private-1b = module.vpc.private-1b
+   sgforbastion = module.sg.bastion_sg
+   sgforweb = module.sg.web_sg 
+   sgfordb = module.sg.db_sg
 }
 
 module "my_alb" {

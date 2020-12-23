@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.public-1a
+    vpc_security_group_ids = [var.sgforbastion]
 
     tags = {
       Name = "kapil_bastion"
@@ -16,6 +17,7 @@ resource "aws_instance" "web1a" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.public-1a
+    vpc_security_group_ids = [var.sgforweb]
 
     tags = {
       Name = "kapil_web_1a"
@@ -28,6 +30,7 @@ resource "aws_instance" "web1b" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.public-1b
+    vpc_security_group_ids = [var.sgforweb]
 
     tags = {
       Name = "kapil_web_1b"
@@ -39,6 +42,7 @@ resource "aws_instance" "db1a" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.private-1a
+    vpc_security_group_ids = [var.sgfordb]
 
     tags = {
       Name = "kapil_db_1a"
@@ -50,6 +54,7 @@ resource "aws_instance" "db1b" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.private-1b
+    vpc_security_group_ids = [var.sgfordb]
 
     tags = {
       Name = "kapil_db_1b"
