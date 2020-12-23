@@ -31,26 +31,30 @@ module "sg" {
    terravpcid = module.vpc.vpc_id
 }
 
-# module "my_ec2" {
-#    source = "../modules/ec2"
-#    #ec2_count = 1
-#    ami_id = "ami-02e44367276fe7adc"
-#    instance_type = "t2.micro"
-#    public-1a = module.vpc.public-1a
-#    public-1b = module.vpc.public-1b
-#    private-1a = module.vpc.private-1a
-#    private-1b = module.vpc.private-1b
-# }
+module "eip" {
+   source = "../modules/eip"
+}
 
-# module "my_alb" {
-#    source = "../modules/alb"
-#    public-1a = module.vpc.public-1a
-#    alb_vpc_id = module.vpc.vpc_id
-#    subnet1a_public = module.vpc.public-1a
-#    subnet1b_public = module.vpc.public-1b
-#    instanceattachment1_id = module.my_ec2.web1ainstance
-#    instanceattachment2_id = module.my_ec2.web1binstance
-# }
+module "ec2" {
+   source = "../modules/ec2"
+   #ec2_count = 1
+   ami_id = "ami-02e44367276fe7adc"
+   instance_type = "t2.micro"
+   public-1a = module.vpc.public-1a
+   public-1b = module.vpc.public-1b
+   private-1a = module.vpc.private-1a
+   private-1b = module.vpc.private-1b
+}
+
+module "my_alb" {
+   source = "../modules/alb"
+   public-1a = module.vpc.public-1a
+   alb_vpc_id = module.vpc.vpc_id
+   subnet1a_public = module.vpc.public-1a
+   subnet1b_public = module.vpc.public-1b
+   instanceattachment1_id = module.ec2.web_1a_id
+   instanceattachment2_id = module.ec2.web_1b_id
+}
 
 # resource "aws_instance" "myinstance" {
 #    ami = "ami-02e44367276fe7adc"
@@ -65,6 +69,11 @@ module "sg" {
 output "VPC_ID" {
    value = module.vpc.vpc_id
 }
+
+output "IGW_ID" {
+   value = module.vpc.igw_id
+}
+
 
 output "SUBNET_PUBLIC_1a" {
    value = module.vpc.public-1a
@@ -94,17 +103,38 @@ output "DB_SG_ID" {
      value = module.sg.db_sg
 }
 
-output "alb_sg" {
+output "ALB_SG" {
      value = module.sg.alb_sg
 }
 
+output "PUBLIC_RT_ID" {
+   value = module.vpc.public_rt_id
+}
 
+output "EIP_ID" {
+   value = module.eip.eip_id
+}
 
+output "PRIVATE_RT_ID" {
+   value = module.vpc.public_rt_id
+}
 
+output "NAT_ID" {
+   value = module.vpc.nat_id
+}
 
+output "WEBSERVER_1a_ID" {
+   value = module.ec2.web_1a_id
+}
 
+output "WEBSERVER_1b_ID" {
+   value = module.ec2.web_1b_id
+}
 
+output "DBSERVER_1a_ID" {
+   value = module.ec2.db_1a_id
+}
 
-
-
-
+output "DBSERVER_1b_ID" {
+   value = module.ec2.db_1b_id
+}
