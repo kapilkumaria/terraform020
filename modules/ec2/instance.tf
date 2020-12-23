@@ -1,11 +1,21 @@
 
+# resource "aws_key_pair" "deployer" {
+#   key_name   = "deployer-key"
+#   public_key = ""
+#    tags = {
+#      Name = "kapil_key-pair"
+#    }
+# }
+
+
 resource "aws_instance" "bastion" {
     #count = var.ec2_count
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.public-1a
     vpc_security_group_ids = [var.sgforbastion]
-
+    key_name = "kapilKP"
+    
     tags = {
       Name = "kapil_bastion"
     }
@@ -18,6 +28,8 @@ resource "aws_instance" "web1a" {
     instance_type = var.instance_type
     subnet_id = var.public-1a
     vpc_security_group_ids = [var.sgforweb]
+    user_data = file("webserver-script.sh")
+    key_name = "kapilKP"
 
     tags = {
       Name = "kapil_web_1a"
@@ -31,6 +43,8 @@ resource "aws_instance" "web1b" {
     instance_type = var.instance_type
     subnet_id = var.public-1b
     vpc_security_group_ids = [var.sgforweb]
+    user_data = file("webserver-script.sh")
+    key_name = "kapilKP"
 
     tags = {
       Name = "kapil_web_1b"
@@ -43,6 +57,7 @@ resource "aws_instance" "db1a" {
     instance_type = var.instance_type
     subnet_id = var.private-1a
     vpc_security_group_ids = [var.sgfordb]
+    key_name = "kapilKP"
 
     tags = {
       Name = "kapil_db_1a"
@@ -55,6 +70,7 @@ resource "aws_instance" "db1b" {
     instance_type = var.instance_type
     subnet_id = var.private-1b
     vpc_security_group_ids = [var.sgfordb]
+    key_name = "kapilKP"
 
     tags = {
       Name = "kapil_db_1b"

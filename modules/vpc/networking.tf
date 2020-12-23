@@ -37,6 +37,7 @@ resource "aws_subnet" "public1a" {
     vpc_id = aws_vpc.terraformvpc.id 
     cidr_block = "192.168.0.0/28"
     availability_zone_id = var.az_pub_1a
+    map_public_ip_on_launch = true
 
     tags = {
       Name = "kapil_public_1a"
@@ -49,7 +50,8 @@ resource "aws_subnet" "public1b" {
    vpc_id = aws_vpc.terraformvpc.id
    cidr_block = "192.168.0.16/28"
    availability_zone_id = var.az_pub_1b
-
+   map_public_ip_on_launch = true
+   
    tags = {
      Name = "kapil_public_1b"
    }

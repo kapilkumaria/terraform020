@@ -54,6 +54,7 @@ module "my_alb" {
    source = "../modules/alb"
    public-1a = module.vpc.public-1a
    alb_vpc_id = module.vpc.vpc_id
+   alb_sg = module.sg.alb_sg
    subnet1a_public = module.vpc.public-1a
    subnet1b_public = module.vpc.public-1b
    instanceattachment1_id = module.ec2.web_1a_id

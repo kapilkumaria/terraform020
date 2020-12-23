@@ -24,7 +24,7 @@ resource "aws_lb" "kkalb" {
   name               = "kapilterraalb"
   internal           = false
   load_balancer_type = "application"
-  #security_groups    = [aws_security_group.lb_sg.id]
+  security_groups    = [var.alb_sg]
   
  # subnets            = data.aws_subnet_ids.subnets.aws_subnet_ids
   #subnets             = "var.subnet1a_public"

@@ -53,17 +53,17 @@ variable "pri-subnet_1b_cidr" {
 ################ Variables for Avaialbilty Zones for Subnets ###############
 
 variable "az_pub_1a" {
-   default = "ca-central-1a"
+   default = "cac1-az1"
 }
 
 variable "az_pub_1b" {
-   default = "ca-central-1b"
+   default = "cac1-az2"
 }
 
 variable "az_pri_1a" {
-   default = "ca-central-1a"
+   default = "cac1-az1"
 }
 
 variable "az_pri_1b" {
-   default = "ca-central-1b"
+   default = "cac1-az2"
 }
