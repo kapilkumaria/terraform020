@@ -143,3 +143,17 @@ output "DBSERVER_1a_ID" {
 output "DBSERVER_1b_ID" {
    value = module.ec2.db_1b_id
 }
+
+output "ALB_ID" {
+   value = module.my_alb.alb-id
+}
+
+output "ALB_DNS_NAME" {
+   value = module.my_alb.alb-dnsname
+}
+
+
+
+
+
+
