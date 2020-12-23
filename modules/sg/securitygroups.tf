@@ -12,6 +12,13 @@ resource "aws_security_group" "bastionsg" {
       cidr_blocks = ["66.222.146.176/32"]
     }
 
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    }
+
     tags = {
       Name = "kapil_bastionsg"
     }
@@ -37,6 +44,13 @@ resource "aws_security_group" "websg" {
       to_port = 80
       protocol = "TCP"
       security_groups = [aws_security_group.albsg.id]
+    }
+
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
     }
 
     tags = {
@@ -66,6 +80,13 @@ resource "aws_security_group" "dbsg" {
       security_groups = [aws_security_group.websg.id]
     }
 
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    }
+
     tags = {
       Name = "kapil_dbsg"
     }
@@ -85,6 +106,13 @@ resource "aws_security_group" "albsg" {
       cidr_blocks = ["0.0.0.0/0"]
     }
 
+    egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    }
+    
     tags = {
       Name = "kapil_albsg"
     }
